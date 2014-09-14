@@ -34,18 +34,22 @@ module.exports = function (grunt) {
 				tasks: ['wiredep']
 			},
 			js: {
-				files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-				tasks: ['newer:jshint:all'],
+				files: ['<%= yeoman.app %>/scripts/**/*.js'],
+				tasks: ['newer:jshint:all', 'useminPrepare', 'concat'],
 				options: {
 					livereload: '<%= connect.options.livereload %>'
 				}
+			},
+			html: {
+				files: ['<%= yeoman.app %>/scripts/**/*.html'],
+				tasks: ['newer:copy:html', 'htmlmin']
 			},
 			jsTest: {
 				files: ['test/spec/{,*/}*.js'],
 				tasks: ['newer:jshint:test', 'karma']
 			},
 			compass: {
-				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/scripts/**/*.{scss,sass}'],
 				tasks: ['compass:server', 'autoprefixer']
 			},
 			gruntfile: {
@@ -58,7 +62,9 @@ module.exports = function (grunt) {
 				files: [
 					'<%= yeoman.app %>/{,*/}*.html',
 					'.tmp/styles/{,*/}*.css',
-					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+					'<%= yeoman.dist %>/views/{,*/}*.html',
+					'<%= yeoman.app %>/script/**/*.js',
 				]
 			}
 		},
@@ -68,7 +74,7 @@ module.exports = function (grunt) {
 			options: {
 				port: 9000,
 				// Change this to '0.0.0.0' to access the server from outside.
-				hostname: 'localhost',
+				hostname: '0.0.0.0',
 				livereload: 35729
 			},
 			livereload: {
@@ -119,7 +125,7 @@ module.exports = function (grunt) {
 			all: {
 				src: [
 					'Gruntfile.js',
-					'<%= yeoman.app %>/scripts/{,*/}*.js'
+					'<%= yeoman.app %>/scripts/**/*.js'
 				]
 			},
 			test: {
@@ -170,7 +176,7 @@ module.exports = function (grunt) {
 				ignorePath:  /\.\.\//
 			},
 			sass: {
-				src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+				src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/scripts/{,*/}*.{scss,sass}'],
 				ignorePath: /(\.\.\/){1,2}bower_components\//
 			}
 		},
@@ -363,6 +369,15 @@ module.exports = function (grunt) {
 				cwd: '<%= yeoman.app %>/styles',
 				dest: '.tmp/styles/',
 				src: '{,*/}*.css'
+			},
+			html: {
+				expand: true,
+				dot: true,
+				cwd: '<%= yeoman.app %>/scripts',
+				dest: '<%= yeoman.dist %>/views/',
+				src: [
+					'**/*.html'
+				]
 			}
 		},
 
@@ -384,7 +399,7 @@ module.exports = function (grunt) {
 		// Remove all console.log's from app directory
 		removelogging: {
 			dist: {
-				src: "<%= yeoman.app %>/scripts/**/*.js" // Each file will be overwritten with the output!
+				src: '<%= yeoman.app %>/scripts/**/*.js' // Each file will be overwritten with the output!
 			}
 		},
 		
@@ -395,7 +410,7 @@ module.exports = function (grunt) {
 				scripts: ['<%= yeoman.app %>/scripts/app.js'],
 				html5Mode: true,
 				startPage: '/api',
-				title: "Docs",
+				title: 'Docs',
 				bestMatch: true
 			},
 			tutorial: {
@@ -414,7 +429,7 @@ module.exports = function (grunt) {
 	});
 	
 	grunt.loadNpmTasks('grunt-ngdocs');
-	grunt.loadNpmTasks("grunt-remove-logging");
+	grunt.loadNpmTasks('grunt-remove-logging');
 	
 	grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
 		if (target === 'dist') {
@@ -461,6 +476,7 @@ module.exports = function (grunt) {
 		'concat',
 		'ngAnnotate',
 		'copy:dist',
+		'copy:html',
 		//'cdnify',
 		'cssmin',
 		'uglify',
