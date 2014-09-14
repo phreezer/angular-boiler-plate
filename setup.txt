@@ -1,0 +1,32 @@
+Codio Setup Steps
+
+	gem update --system
+	gem install sass
+	gem install compass
+	npm update -g yo
+	npm install -g generator-angular
+	yo angular [app name]
+	npm install --save-dev grunt-cdnify
+	npm install --save-dev chalk
+	npm install --save-dev grunt-karma
+	npm install --save-dev grunt-contrib-compass
+	npm install --save-dev grunt-remove-logging
+	npm install --save-dev grunt-ngdocs
+	bower install
+	Edit Gruntfile.json
+		wiredep: {
+		  options: {
+			//cwd: '<%= yeoman.app %>'   <--- Comment this out
+		  }
+
+		  
+Initial Upload to Github
+	git remote add origin https://github.com/phreezer/angular-boiler-plate.git
+	git push -u origin master
+
+	
+Git Commands
+	git status
+	git add --all
+	git commit -a
+	git push
