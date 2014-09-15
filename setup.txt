@@ -24,6 +24,17 @@ Initial Upload to Github
 	git remote add origin https://github.com/phreezer/angular-boiler-plate.git
 	git push -u origin master
 
+
+Windows setup
+	install ruby
+	install nodejs
+	run cmd as administrator
+	gem install sass
+	gem install compass
+	npm install
+	bower install
+	
+
 	
 Git Commands
 	git status

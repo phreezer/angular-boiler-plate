@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= yeoman.app %>/scripts/**/*.html'],
-				tasks: ['newer:copy:html', 'htmlmin']
+				tasks: ['copy:html']
 			},
 			jsTest: {
 				files: ['test/spec/{,*/}*.js'],
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 					'<%= yeoman.app %>/{,*/}*.html',
 					'.tmp/styles/{,*/}*.css',
 					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-					'<%= yeoman.dist %>/views/{,*/}*.html',
+					'<%= yeoman.app %>/views/**/*.html',
 					'<%= yeoman.app %>/script/**/*.js',
 				]
 			}
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
 			options: {
 				port: 9000,
 				// Change this to '0.0.0.0' to access the server from outside.
-				hostname: '0.0.0.0',
+				hostname: 'localhost',
 				livereload: 35729
 			},
 			livereload: {
@@ -362,7 +362,15 @@ module.exports = function (grunt) {
 					cwd: '.',
 					src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
 					dest: '<%= yeoman.dist %>'
-				}]
+				}, { // Move HTML files to [dist]/views folder
+					expand: true,
+					dot: true,
+					cwd: '<%= yeoman.app %>/scripts',
+					dest: '<%= yeoman.dist %>/views/',
+					src: [
+						'**/*.html'
+					]
+			}]
 			},
 			styles: {
 				expand: true,
@@ -370,11 +378,11 @@ module.exports = function (grunt) {
 				dest: '.tmp/styles/',
 				src: '{,*/}*.css'
 			},
-			html: {
+			html: { // Move HTML files to [app]/views folder for grunt serve
 				expand: true,
 				dot: true,
 				cwd: '<%= yeoman.app %>/scripts',
-				dest: '<%= yeoman.dist %>/views/',
+				dest: '<%= yeoman.app %>/views/',
 				src: [
 					'**/*.html'
 				]
@@ -441,6 +449,7 @@ module.exports = function (grunt) {
 			'wiredep',
 			'concurrent:server',
 			'autoprefixer',
+			'copy:html',
 			'connect:livereload',
 			'watch'
 		]);
@@ -476,7 +485,6 @@ module.exports = function (grunt) {
 		'concat',
 		'ngAnnotate',
 		'copy:dist',
-		'copy:html',
 		//'cdnify',
 		'cssmin',
 		'uglify',

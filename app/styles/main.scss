@@ -1,7 +1,12 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+// Over write bootstrap with custom settings
+@import "bootstrap-theme.scss";
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+
 
 @import "../scripts/components/header/header.scss";
 @import "../scripts/components/navigation/navigation.scss";
