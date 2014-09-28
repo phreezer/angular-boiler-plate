@@ -31,7 +31,8 @@
     "chalk": "~0.5.1",
     "grunt-karma": "~0.9.0",
     "grunt-remove-logging": "~0.2.0",
-    "grunt-ngdocs": "~0.2.3"
+    "grunt-ngdocs": "~0.2.3",
+    "jshint-stylish-ex": "~0.2.0"
   },
   "engines": {
     "node": ">=0.10.0"

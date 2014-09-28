@@ -18,7 +18,7 @@ angular.module('openApp')
 	.directive('appNavigation', function () {
 		return {
 			controller: function($scope) {
-         
+         		$scope.navigation = '';				// Placeholder
 			},
 			templateUrl: 'views/components/navigation/navigation.html',
 			restrict: 'C'

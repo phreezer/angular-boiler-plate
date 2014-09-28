@@ -120,7 +120,7 @@ module.exports = function (grunt) {
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc',
-				reporter: require('jshint-stylish')
+				reporter: require('jshint-stylish-ex')
 			},
 			all: {
 				src: [
@@ -176,7 +176,7 @@ module.exports = function (grunt) {
 				ignorePath:  /\.\.\//
 			},
 			sass: {
-				src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/scripts/{,*/}*.{scss,sass}'],
+				src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}','<%= yeoman.app %>/scripts/**/*.{scss,sass}'],
 				ignorePath: /(\.\.\/){1,2}bower_components\//
 			}
 		},
@@ -275,6 +275,20 @@ module.exports = function (grunt) {
 		// concat: {
 		//   dist: {}
 		// },
+		// 
+		uglify: {
+			dist: {
+				files: {
+					'<%= yeoman.dist %>/scripts/ie.js': ['<%= yeoman.dist %>/scripts/ie.js']
+				}
+			}
+		},
+		concat: {
+			dist: {
+				src: '<%= yeoman.app %>/scripts/**/ie.js',
+				dest: '<%= yeoman.dist %>/scripts/ie.js'
+			}
+		},
 
 		imagemin: {
 			dist: {
@@ -407,7 +421,7 @@ module.exports = function (grunt) {
 		// Remove all console.log's from app directory
 		removelogging: {
 			dist: {
-				src: '<%= yeoman.app %>/scripts/**/*.js' // Each file will be overwritten with the output!
+				src: ['<%= yeoman.app %>/scripts/**/*.js', '!<%= yeoman.app %>/scripts/**/console-log.js'] // Each file will be overwritten with the output!
 			}
 		},
 		
@@ -436,8 +450,11 @@ module.exports = function (grunt) {
 		}
 	});
 	
+
 	grunt.loadNpmTasks('grunt-ngdocs');
 	grunt.loadNpmTasks('grunt-remove-logging');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+
 	
 	grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
 		if (target === 'dist') {

@@ -14,6 +14,7 @@
 /*jshint indent:4 */
 
 window.log = function(){
+	var log;
 	log.history = log.history || [];
 	log.history.push(arguments);
 	if(this.console){

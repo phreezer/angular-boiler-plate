@@ -18,7 +18,7 @@ angular.module('openApp')
 	.directive('appHeader', function () {
 		return {
 			controller: function($scope) {
-         		
+         		$scope.header = '';				// Placeholder
 			},
 			templateUrl: 'views/components/header/header.html',
 			restrict: 'C'

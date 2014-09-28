@@ -12,12 +12,14 @@ Codio Setup Steps
 	npm install --save-dev grunt-contrib-compass
 	npm install --save-dev grunt-remove-logging
 	npm install --save-dev grunt-ngdocs
+	bower install jquery#~1.10.0 --save
 	bower install
 	Edit Gruntfile.json
 		wiredep: {
 		  options: {
 			//cwd: '<%= yeoman.app %>'   <--- Comment this out
 		  }
+
 
 		  
 Initial Upload to Github

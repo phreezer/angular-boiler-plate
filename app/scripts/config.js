@@ -11,18 +11,8 @@
 'use strict';
 /*jshint indent:4 */
 
-(function ( angular ) {
-
 angular.module('openApp')
+.constant('APP_CONFIG',{
+	BASE_DIRECTORY: '',						// Leave blank unless there is a special case to change
 
-	.directive('appFooter', function () {
-		return {
-			controller: function($scope) {
-				$scope.footer = '';				// Placeholder
-			},
-			templateUrl: 'views/components/footer/footer.html',
-			restrict: 'C'
-		};
-	});
-
-})( window.angular );
+});
