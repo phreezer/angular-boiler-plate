@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name openApp
+ * @name lmApp
  * @description
- * # openApp
+ * # lmApp
  *
  * Main module of the application.
  */
 angular
-  .module('openApp', [
+  .module('lmApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
