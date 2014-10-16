@@ -1,12 +1,11 @@
-$icon-font-path: "fonts/";
+$icon-font-path: "../fonts/";
 
-// Over write bootstrap with custom settings
-@import "bootstrap-theme.scss";
+@import "mixins.scss";
+@import "variables.scss";
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "theme.scss";
 
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
-
+@import "../scripts/components/shared/shared.scss";
 
 @import "../scripts/components/header/header.scss";
 @import "../scripts/components/navigation/navigation.scss";

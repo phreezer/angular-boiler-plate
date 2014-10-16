@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" manifest="web.appcache">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta charset="utf-8">
@@ -22,32 +22,17 @@
 		<!-- endbuild -->
 		
 	</head>
-	<body ng-app="openApp">
-		<!--[if lt IE 7]>
-		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
-
+	<body ng-app="lmApp">
 
 		<div class="container">
-			<div class="app-header"></div>
 			<div class="app-navigation"></div>
+			<div class="app-header"></div>
 			
 			<div ng-view=""></div>
 
 			<div class="app-footer"></div>
 		</div>
 
-
-		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-									})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-XXXXX-X');
-			ga('send', 'pageview');
-		</script>
 
 		<!-- build:js(.) scripts/oldieshim.js -->
 		<!--[if lt IE 9]>
@@ -83,16 +68,23 @@
 		<!-- endbuild -->
 		
 		<!-- build:js({.tmp,app}) scripts/scripts.js -->
+		<!-- Libraries/Polyfils -->
 		<script src="scripts/lib/console-log.js"></script>
+		
+		<!-- App -->
 		<script src="scripts/app.js"></script>
 		<script src="scripts/config.js"></script>
 		
+		<!-- Services -->
 		<script src="scripts/services/menu.js"></script>
 		
+		<!-- Components -->
+		<script src="scripts/components/footer/footer.js"></script>
 		<script src="scripts/components/header/header.js"></script>
 		<script src="scripts/components/navigation/navigation.js"></script>
-		<script src="scripts/components/footer/footer.js"></script>
+		<script src="scripts/components/responsive/responsive.js"></script>
 		
+		<!-- Page Controllers -->
 		<script src="scripts/pages/main/main.js"></script>
 		<!-- endbuild -->
 

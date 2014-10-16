@@ -13,7 +13,7 @@
 
 (function ( angular ) {
 
-	angular.module('openApp')
+	angular.module('lmApp')
 
 	.factory('menu', function ($http, APP_CONFIG) {
 		var promise;

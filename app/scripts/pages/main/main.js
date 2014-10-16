@@ -11,14 +11,14 @@
 'use strict';
 /*jshint indent:4 */
 
-/**
- * @ngdoc function
- * @name openApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the openApp
- */
-angular.module('openApp')
-.controller('MainCtrl', function () {
+(function ( angular ) {
 
-});
+	angular.module('lmApp')
+
+	.controller('MainCtrl', function () {
+		
+	});
+
+
+})( window.angular );
+

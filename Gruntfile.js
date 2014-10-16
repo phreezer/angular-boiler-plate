@@ -125,7 +125,9 @@ module.exports = function (grunt) {
 			all: {
 				src: [
 					'Gruntfile.js',
-					'<%= yeoman.app %>/scripts/**/*.js'
+					'<%= yeoman.app %>/scripts/**/*.js',
+					'!<%= yeoman.app %>/scripts/**/ie.js',			// Ignore other people's Polyfills
+					'!<%= yeoman.app %>/scripts/lib/*.js'			// Ignore other people's libraries
 				]
 			},
 			test: {
@@ -275,7 +277,6 @@ module.exports = function (grunt) {
 		// concat: {
 		//   dist: {}
 		// },
-		// 
 		uglify: {
 			dist: {
 				files: {
@@ -283,10 +284,11 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
 		concat: {
 			dist: {
 				src: '<%= yeoman.app %>/scripts/**/ie.js',
-				dest: '<%= yeoman.dist %>/scripts/ie.js'
+					dest: '<%= yeoman.dist %>/scripts/ie.js'
 			}
 		},
 
@@ -324,7 +326,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= yeoman.dist %>',
-					src: ['*.html', 'views/{,*/}*.html'],
+					src: ['*.html', 'views/{,*/}*.html', '!style-guide.html'],
 					dest: '<%= yeoman.dist %>'
 				}]
 			}
@@ -417,14 +419,14 @@ module.exports = function (grunt) {
 				'svgmin'
 			]
 		},
-		
+
 		// Remove all console.log's from app directory
 		removelogging: {
 			dist: {
 				src: ['<%= yeoman.app %>/scripts/**/*.js', '!<%= yeoman.app %>/scripts/**/console-log.js'] // Each file will be overwritten with the output!
 			}
 		},
-		
+
 		// Generate Documentation
 		ngdocs: {
 			options: {
@@ -449,13 +451,12 @@ module.exports = function (grunt) {
 			}
 		}
 	});
-	
 
 	grunt.loadNpmTasks('grunt-ngdocs');
 	grunt.loadNpmTasks('grunt-remove-logging');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 
-	
+
 	grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
 		if (target === 'dist') {
 			return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -484,15 +485,15 @@ module.exports = function (grunt) {
 		'connect:test',
 		'karma'
 	]);
-	
+
 	grunt.registerTask('docs', [
 		'ngdocs'
 	]);
-	
+
 	grunt.registerTask('logs', [
 		'removelogging'
 	]);
-		
+
 	grunt.registerTask('build', [
 		'clean:dist',
 		'wiredep',

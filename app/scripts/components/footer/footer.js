@@ -13,7 +13,7 @@
 
 (function ( angular ) {
 
-angular.module('openApp')
+angular.module('lmApp')
 
 	.directive('appFooter', function () {
 		return {
