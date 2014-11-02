@@ -11,7 +11,7 @@
 'use strict';
 /*jshint indent:4 */
 
-angular.module('openApp')
+angular.module('lmApp')
 .constant('APP_CONFIG',{
 	BASE_DIRECTORY: '',						// Leave blank unless there is a special case to change
 
