@@ -17,11 +17,11 @@ angular.module('lmApp')
 
 	.directive('appHeader', function () {
 		return {
-			controller: function($scope) {
-         		$scope.header = '';				// Placeholder
-			},
+			restrict: 'C',
 			templateUrl: 'views/components/header/header.html',
-			restrict: 'C'
+			controller: function() {
+				
+			}
 		};
 	});
 
