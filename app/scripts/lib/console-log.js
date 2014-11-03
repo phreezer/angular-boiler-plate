@@ -1,13 +1,12 @@
 /**
 * Console Log
 * (c) 2014 by Marcus Heath Showalter. All rights reserved.
-*
-* Adds console.log functionality to browsers that don't support console
-*
+* 
 * Author: Marcus Heath Showalter
 * Web: heathshowalter.com
 * Email: marcus.h.showalter@gmail.com
-* Date: 2014-09-15 01:56 AM
+* 
+* Adds console.log functionality to browsers that don't support console
 */
 
 'use strict';
