@@ -5,7 +5,6 @@
 * Author: Marcus Heath Showalter
 * Web: heathshowalter.com
 * Email: marcus.h.showalter@gmail.com
-* Date: 2014-09-14 07:43 PM
 */
 
 'use strict';
