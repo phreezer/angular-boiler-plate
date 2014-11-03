@@ -6,7 +6,9 @@ dist
 .tmp
 .sass-cache
 bower_components
-
+resources
+design
+assets
 
 #################
 ## Binaries/Large Files
