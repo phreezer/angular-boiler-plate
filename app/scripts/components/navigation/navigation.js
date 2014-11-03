@@ -17,11 +17,11 @@ angular.module('lmApp')
 
 	.directive('appNavigation', function () {
 		return {
-			controller: function($scope) {
-         		$scope.navigation = '';				// Placeholder
-			},
+			restrict: 'C',
 			templateUrl: 'views/components/navigation/navigation.html',
-			restrict: 'C'
+			controller: function() {
+				
+			}
 		};
 	});
 
