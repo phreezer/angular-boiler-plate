@@ -17,11 +17,11 @@ angular.module('lmApp')
 
 	.directive('appFooter', function () {
 		return {
+			restrict: 'C',
+			templateUrl: 'views/components/footer/footer.html',
 			controller: function($scope) {
 				$scope.footer = '';				// Placeholder
-			},
-			templateUrl: 'views/components/footer/footer.html',
-			restrict: 'C'
+			}
 		};
 	});
 
