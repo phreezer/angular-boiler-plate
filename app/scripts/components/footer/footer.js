@@ -19,8 +19,8 @@ angular.module('lmApp')
 		return {
 			restrict: 'C',
 			templateUrl: 'views/components/footer/footer.html',
-			controller: function($scope) {
-				$scope.footer = '';				// Placeholder
+			controller: function() {
+				
 			}
 		};
 	});
