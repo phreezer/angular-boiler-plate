@@ -1,11 +1,9 @@
 /**
-* Cumulus Frontend
-* (c) 2014 Lockheed Martin. All rights reserved.
+* Boilerplate
 *
 * Author: Marcus Heath Showalter
 * Web: heathshowalter.com
-* Email: marcus.h.showalter@lmco.com
-* Date: 2014-09-14 07:39 PM
+* Email: marcus.h.showalter@gmail.com
 */
 
 'use strict';
