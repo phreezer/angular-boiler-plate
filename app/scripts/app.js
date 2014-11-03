@@ -1,13 +1,14 @@
+/**
+* Boilerplate
+* (c) 2014 by Marcus Heath Showalter. All rights reserved.
+*
+* Author: Marcus Heath Showalter
+* Web: heathshowalter.com
+* Email: marcus.h.showalter@gmail.com
+*/
+
 'use strict';
 
-/**
- * @ngdoc overview
- * @name lmApp
- * @description
- * # lmApp
- *
- * Main module of the application.
- */
 angular
   .module('lmApp', [
     'ngAnimate',
