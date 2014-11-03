@@ -1,5 +1,6 @@
 /**
 * Boilerplate
+* (c) 2014 by Marcus Heath Showalter. All rights reserved.
 *
 * Author: Marcus Heath Showalter
 * Web: heathshowalter.com
