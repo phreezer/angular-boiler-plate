@@ -18,7 +18,8 @@ module.exports = function (grunt) {
 	// Configurable paths for the application
 	var appConfig = {
 		app: require('./bower.json').appPath || 'app',
-		dist: 'dist'
+		dist: 'dist',
+		deploy: '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/SITENAMEHERE/website'
 	};
 
 	// Define the configuration for all the tasks
@@ -64,7 +65,7 @@ module.exports = function (grunt) {
 					'.tmp/styles/{,*/}*.css',
 					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
 					'.tmp/views/**/*.html',
-					'<%= yeoman.app %>/scripts/**/*.js',
+					'<%= yeoman.app %>/script/**/*.js',
 				]
 			}
 		},
@@ -150,6 +151,24 @@ module.exports = function (grunt) {
 					]
 				}]
 			},
+			deploy: {
+				options: {
+					force: true
+				},
+				files: [{
+					dot: true,
+					src: [
+						'<%= yeoman.deploy %>/fonts/{,*/}*',
+						'<%= yeoman.deploy %>/json/{,*/}*',
+						'<%= yeoman.deploy %>/scripts/{,*/}*',
+						'<%= yeoman.deploy %>/styles/{,*/}*',
+						'<%= yeoman.deploy %>/bower_components/{,*/}*',
+						'<%= yeoman.deploy %>/views/{,*/}*'
+						//'<%= yeoman.deploy %>/{,*/}*',	// Delete all
+						//'!<%= yeoman.deploy %>/.git*'		// Leave Git alone
+					]
+				}]
+			},
 			server: '.tmp'
 		},
 
@@ -218,6 +237,7 @@ module.exports = function (grunt) {
 				src: [
 					'<%= yeoman.dist %>/scripts/{,*/}*.js',
 					'<%= yeoman.dist %>/styles/{,*/}*.css',
+					//'<%= yeoman.dist %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
 					'<%= yeoman.dist %>/styles/fonts/*'
 				]
 			}
@@ -353,6 +373,12 @@ module.exports = function (grunt) {
 
 		// Copies remaining files to places other tasks can use
 		copy: {
+			deploy: {
+				expand: true,
+				cwd: '<%= yeoman.dist %>',
+				src: '**/*.*',
+				dest: '<%= yeoman.deploy %>'
+			},
 			dist: {
 				files: [{
 					expand: true,
@@ -426,6 +452,24 @@ module.exports = function (grunt) {
 			}
 		},
 
+		preprocess : {
+			options: {
+				inline: true,
+					context : {
+						DEBUG: false
+					}
+				},
+				html : {
+					src : [
+						'<%= yeoman.dist %>/index.html',
+						'<%= yeoman.dist %>/views/**/*.html'
+					]
+				},
+				js : {
+					src: '.tmp/concat/scripts/*.js'
+				}
+		},
+
 		// Generate Documentation
 		ngdocs: {
 			options: {
@@ -454,7 +498,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-ngdocs');
 	grunt.loadNpmTasks('grunt-remove-logging');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-
+	grunt.loadNpmTasks('grunt-preprocess');
 
 	grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
 		if (target === 'dist') {
@@ -500,6 +544,8 @@ module.exports = function (grunt) {
 		'concurrent:dist',
 		'autoprefixer',
 		'concat',
+		'preprocess:js',
+		'preprocess:html',
 		'ngAnnotate',
 		'copy:dist',
 		//'cdnify',
@@ -508,6 +554,11 @@ module.exports = function (grunt) {
 		'filerev',
 		'usemin',
 		'htmlmin'
+	]);
+
+	grunt.registerTask('deploy', [
+		'clean:deploy',
+		'copy:deploy'
 	]);
 
 	grunt.registerTask('default', [
