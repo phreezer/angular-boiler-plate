@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 	var appConfig = {
 		app: require('./bower.json').appPath || 'app',
 		dist: 'dist',
-		deploy: '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/SITENAMEHERE/website'
+		deploy: '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/YOURSITE/SitePages'
 	};
 
 	// Define the configuration for all the tasks
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 			options: {
 				port: 9000,
 				// Change this to '0.0.0.0' to access the server from outside.
-				hostname: 'localhost',
+				hostname: '0.0.0.0',
 				livereload: 35729
 			},
 			livereload: {
@@ -157,13 +157,15 @@ module.exports = function (grunt) {
 				},
 				files: [{
 					dot: true,
+					expand: true,
+					cwd: '<%= yeoman.deploy %>/',
 					src: [
-						'<%= yeoman.deploy %>/fonts/{,*/}*',
-						'<%= yeoman.deploy %>/json/{,*/}*',
-						'<%= yeoman.deploy %>/scripts/{,*/}*',
-						'<%= yeoman.deploy %>/styles/{,*/}*',
-						'<%= yeoman.deploy %>/bower_components/{,*/}*',
-						'<%= yeoman.deploy %>/views/{,*/}*'
+						'fonts/{,*/}*',
+						'json/{,*/}*',
+						'scripts/{,*/}*',
+						'styles/{,*/}*',
+						'bower_components/{,*/}*',
+						'views/{,*/}*'
 						//'<%= yeoman.deploy %>/{,*/}*',	// Delete all
 						//'!<%= yeoman.deploy %>/.git*'		// Leave Git alone
 					]
@@ -379,6 +381,20 @@ module.exports = function (grunt) {
 				src: '**/*.*',
 				dest: '<%= yeoman.deploy %>'
 			},
+			fastdeploy: {
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: '<%= yeoman.dist %>',
+					dest: '<%= yeoman.deploy %>',
+					src: [
+						'*.html',
+						'views/**/*.html',
+						'scripts/{,*/}*.js',
+						'styles/{,*/}*.css'
+					]
+				}]
+			},
 			dist: {
 				files: [{
 					expand: true,
@@ -556,10 +572,46 @@ module.exports = function (grunt) {
 		'htmlmin'
 	]);
 
-	grunt.registerTask('deploy', [
+	/*
+	grunt.registerTask('deploy-prod', [
 		'clean:deploy',
 		'copy:deploy'
 	]);
+	*/
+
+	grunt.registerTask('deploy-prod', 'Upload to SharePoint', function (target) {
+		appConfig.deploy = '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/YOURSITE/SitePages';
+
+		grunt.task.run([
+			'clean:deploy',
+			'copy:deploy'
+		]);
+	});
+
+	grunt.registerTask('deploy-dev', 'Upload to SharePoint', function (target) {
+		appConfig.deploy = '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/YOURSITE/SitePages/dev';
+
+		grunt.task.run([
+			'clean:deploy',
+			'copy:deploy'
+		]);
+	});
+
+	grunt.registerTask('deploy-prod-fast', 'Upload to SharePoint', function (target) {
+		appConfig.deploy = '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/YOURSITE/SitePages';
+
+		grunt.task.run([
+			'copy:fastdeploy'
+		]);
+	});
+
+	grunt.registerTask('deploy-dev-fast', 'Upload to SharePoint', function (target) {
+		appConfig.deploy = '//isgs-spdf.external.lmco.com@SSL/DavWWWRoot/sites/YOURSITE/SitePages/dev';
+
+		grunt.task.run([
+			'copy:fastdeploy'
+		]);
+	});
 
 	grunt.registerTask('default', [
 		'newer:jshint',
