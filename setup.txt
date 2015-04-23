@@ -1,4 +1,4 @@
-Codio Setup Steps
+-Codio Setup Steps
 
 	gem update --system
 	gem install sass
